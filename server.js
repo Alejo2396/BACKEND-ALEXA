@@ -8,6 +8,10 @@ app.use(cors());
 app.use(express.json());
 app.use('/api', authRoutes);
 
+app.get("/", (req, res) => {
+  res.send("🚀 Backend Alexa funcionando correctamente");
+});
+
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
