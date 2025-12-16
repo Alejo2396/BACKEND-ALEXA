@@ -1,3 +1,5 @@
+require("dotenv").config(); // 👈 MUY IMPORTANTE
+
 const express = require("express");
 const cors = require("cors");
 
@@ -15,8 +17,8 @@ app.get("/", (req, res) => {
   res.status(200).send("OK");
 });
 
-// Puerto de Railway (NO pongas fallback)
-const PORT = process.env.PORT;
+// Puerto de Railway
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Servidor escuchando en puerto ${PORT}`);
