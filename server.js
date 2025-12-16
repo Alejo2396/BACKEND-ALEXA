@@ -1,19 +1,23 @@
-require('dotenv').config(); 
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
-const authRoutes = require("./routes/authRoutes");
-const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
-app.use('/api', authRoutes);
 
+// Rutas
+const authRoutes = require("./routes/authRoutes");
+app.use("/api", authRoutes);
+
+// Health check obligatorio para Railway
 app.get("/", (req, res) => {
-  res.send("🚀 Backend Alexa funcionando correctamente");
+  res.status(200).send("OK");
 });
 
-const PORT = process.env.PORT || 4000;
+// Puerto de Railway (NO pongas fallback)
+const PORT = process.env.PORT;
 
-app.listen(PORT, () => {
-  console.log(`Servidor ejecutando en puerto ${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Servidor escuchando en puerto ${PORT}`);
 });
